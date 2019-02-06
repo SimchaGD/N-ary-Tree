@@ -33,7 +33,10 @@ namespace N_array_Tree
     {
         static void Main(string[] args)
         {
-            
+            Tree<int> Boom = new Tree<int>(5);
+            Boom.AddChildNode(3, Boom.TopParent);
+            Boom.TraverseNodes();
+            System.Console.ReadLine();
         }
     }
 }
