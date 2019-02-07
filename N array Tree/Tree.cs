@@ -31,34 +31,46 @@ namespace N_array_Tree
         public int Count{ get; set; }
         public int LeafCount { get; set; }
         public TreeNode<T> TopParent { get; set; }
+        public List<T> Tree1D = new List<T>();
         public Tree(T initialValue)
         {
             Count = 1;
             LeafCount = 1;
             TopParent = new TreeNode<T>(initialValue, null);
+            Tree1D.Add(initialValue);
         }
 
-        public void AddChildNode(T value, TreeNode<T> Parent)
+        public TreeNode<T> AddChildNode(T value, TreeNode<T> Parent)
         {
+            // update properties
             Count++;
             if (Parent.Children.Count > 0)
             {
                 LeafCount++;
             }
+            
             TreeNode<T> childNode = new TreeNode<T>(value, Parent);
             Parent.Children.Add(childNode);
-            
+            return childNode;
         }
 
-        public void TraverseNodes()
-        {
-            List<T> Tree1D = new List<T>();
-            Tree1D.Add(TopParent.Value);
-            if (Count == 1) return; // Als count == 1, dan is er allen maar een TopParent
-            foreach (TreeNode<T> child in TopParent.Children)
+        public List<T> TraverseNodes(TreeNode<T> StartParent)
+        {                        
+            foreach (TreeNode<T> child in StartParent.Children)
             {
                 Tree1D.Add(child.Value);
+                if (child.Children.Count > 0) TraverseNodes(child);
             }
+            return Tree1D;
+        }
+
+        public override string ToString()
+        {
+            string TreeString = "";
+            List<T> TraverseTree = TraverseNodes(TopParent);
+
+
+            return TreeString;
         }
 
     }

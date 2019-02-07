@@ -33,9 +33,15 @@ namespace N_array_Tree
     {
         static void Main(string[] args)
         {
-            Tree<int> Boom = new Tree<int>(5);
-            Boom.AddChildNode(3, Boom.TopParent);
-            Boom.TraverseNodes();
+            Tree<int> Boompje = new Tree<int>(1);
+            TreeNode<int> Child1 = Boompje.AddChildNode(3, Boompje.TopParent);
+            TreeNode<int> Child2 = Boompje.AddChildNode(8, Child1);
+            TreeNode<int> Child21 = Boompje.AddChildNode(2, Child1);
+            TreeNode<int> Child11 = Boompje.AddChildNode(1, Boompje.TopParent);
+
+            List<int> TraverseBoom = Boompje.TraverseNodes(Boompje.TopParent);
+
+            System.Console.WriteLine(string.Join(",", TraverseBoom.ToArray()));
             System.Console.ReadLine();
         }
     }
