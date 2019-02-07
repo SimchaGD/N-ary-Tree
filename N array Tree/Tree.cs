@@ -31,13 +31,13 @@ namespace N_array_Tree
         public int Count{ get; set; }
         public int LeafCount { get; set; }
         public TreeNode<T> TopParent { get; set; }
-        public List<T> Tree1D = new List<T>();
+        public StringBuilder TraverseString = new StringBuilder();
+
         public Tree(T initialValue)
         {
             Count = 1;
             LeafCount = 1;
             TopParent = new TreeNode<T>(initialValue, null);
-            Tree1D.Add(initialValue);
         }
 
         public TreeNode<T> AddChildNode(T value, TreeNode<T> Parent)
@@ -54,24 +54,33 @@ namespace N_array_Tree
             return childNode;
         }
 
-        public List<T> TraverseNodes(TreeNode<T> StartParent)
-        {                        
+        public string TraverseNodes(TreeNode<T> StartParent)
+        {
+            TraverseString.Clear();
+            TraverseString.Append(StartParent.Value.ToString());
+            TraverseString = TraverseStringBuilder(StartParent);
+            return TraverseString.ToString();
+        }
+
+        public StringBuilder TraverseStringBuilder(TreeNode<T> StartParent)
+        {
+            TraverseString.Append("[");
+            int ChildCount = 1;
             foreach (TreeNode<T> child in StartParent.Children)
             {
-                Tree1D.Add(child.Value);
-                if (child.Children.Count > 0) TraverseNodes(child);
+                TraverseString.Append(" " + child.Value.ToString() + ",");
+                if (child.Children.Count > 0)
+                {
+                    TraverseStringBuilder(child);
+                }
+                if (StartParent.Children.Count == ChildCount) TraverseString.Append("]");
+                ChildCount++;
             }
-            return Tree1D;
+
+            return TraverseString;
         }
 
-        public override string ToString()
-        {
-            string TreeString = "";
-            List<T> TraverseTree = TraverseNodes(TopParent);
-
-
-            return TreeString;
-        }
+        
 
     }
 }

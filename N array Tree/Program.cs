@@ -9,14 +9,14 @@ using System.Threading.Tasks;
  *  Gebruik 2 classes: TreeNode en Tree
  *  Elke TreeNode bevat een waarde van type T
  *  Implementeer de volgende properties op Tree:
- *      Count (Geef het aan Nodes van de Tree)
- *      LeafCount (Geef het aantal leaf Nodes in de Tree)
+ *DONE  Count (Geef het aan Nodes van de Tree)
+ *DONE  LeafCount (Geef het aantal leaf Nodes in de Tree)
  *  Implementeer de volgende methods op Tree:
- *      AddChildNode(parentNode, value)
+ *DONE  AddChildNode(parentNode, value)
  *      [Voegt een nieuwe TreeNode toe met een waarde onder de parent TreeNode]
  *      RemoveNode(node)
  *      [Verwijder TreeNode met onderliggende Nodes]
- *      TraverseNodes()
+ *DONE  TraverseNodes()
  *      [Geeft alle node waardes terug (met iterator)]
  *      SumToLeafs()
  *      [Geeft de som van alle onderliggende nodes terug]
@@ -38,10 +38,17 @@ namespace N_array_Tree
             TreeNode<int> Child2 = Boompje.AddChildNode(8, Child1);
             TreeNode<int> Child21 = Boompje.AddChildNode(2, Child1);
             TreeNode<int> Child11 = Boompje.AddChildNode(1, Boompje.TopParent);
+            TreeNode<int> Child31 = Boompje.AddChildNode(5, Child11);
+            TreeNode<int> Child32 = Boompje.AddChildNode(7, Child11);
+            TreeNode<int> Child33 = Boompje.AddChildNode(8, Child11);
+            
 
-            List<int> TraverseBoom = Boompje.TraverseNodes(Boompje.TopParent);
+            string TraverseBoom = Boompje.TraverseNodes(Boompje.TopParent);
+            string TraverseBoomHalf = Boompje.TraverseNodes(Child1);
 
-            System.Console.WriteLine(string.Join(",", TraverseBoom.ToArray()));
+            System.Console.WriteLine(TraverseBoom);
+            System.Console.WriteLine(Boompje.Count.ToString() + " " + Boompje.LeafCount.ToString());
+            System.Console.WriteLine(TraverseBoomHalf);
             System.Console.ReadLine();
         }
     }
