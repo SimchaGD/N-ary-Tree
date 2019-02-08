@@ -108,18 +108,26 @@ namespace NTreeTest
             // Assert
             Assert.AreEqual("1[ 2,[ 4,] 3,]", TraverseTree);
         }
-        //[TestCase]
-        //public void SumToLeafsTestIntegers()
-        //{
-        //    // Arrange
-        //    int InitialValue = 4;
-        //    Tree<int> tree = new Tree<int>(InitialValue);
-        //    TreeNode<int> Child1 = new TreeNode<int>(3, tree.TopParent);
 
+        [TestCase]
+        public void SumToLeafsTestIntegers()
+        {
+            // Arrange
+            int InitialValue = 1;
+            Tree<int> tree = new Tree<int>(InitialValue);
+            TreeNode<int> Child1 = new TreeNode<int>(2, tree.TopParent);
+            TreeNode<int> Child2 = tree.AddChildNode(3, tree.TopParent);
+            TreeNode<int> Child1_1 = tree.AddChildNode(4, Child1);
 
-        //    // Act
+            // Act
+            List<int> SumLeafs = tree.SumToLeafs();
 
-        //    // Assert
-        //}
+            // Assert
+            Assert.Multiple(() =>
+           {
+               Assert.Contains(4, SumLeafs);
+               Assert.Contains(7, SumLeafs);
+           });   
+        }
     }
 }
