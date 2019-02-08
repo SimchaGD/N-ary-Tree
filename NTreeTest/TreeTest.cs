@@ -103,7 +103,7 @@ namespace NTreeTest
             TreeNode<int> Child1_1 = tree.AddChildNode(4, Child1);
 
             // Act
-            string TraverseTree = tree.TraverseNodes(tree.TopParent);
+            string TraverseTree = tree.TraverseNodes();
 
             // Assert
             Assert.AreEqual("1[ 2,[ 4,] 3,]", TraverseTree);

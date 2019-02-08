@@ -31,35 +31,42 @@ namespace N_array_Tree
         public int Count{ get; set; }
         public int LeafCount { get; set; }
         public TreeNode<T> TopParent { get; set; }
-        public StringBuilder TraverseString = new StringBuilder();
-        public T SumLeaf;
+        private StringBuilder TraverseString = new StringBuilder();
+        private List<TreeNode<T>> LeafLisT = new List<TreeNode<T>>();
 
         public Tree(T initialValue)
         {
             Count = 1;
             LeafCount = 1;
             TopParent = new TreeNode<T>(initialValue, null);
+            LeafLisT.Add(TopParent);
         }
 
         public TreeNode<T> AddChildNode(T value, TreeNode<T> Parent)
         {
+            
             // update properties
             Count++;
             if (Parent.Children.Count > 0)
-            {
+            {   
                 LeafCount++;
             }
-            
             TreeNode<T> childNode = new TreeNode<T>(value, Parent);
+
+            LeafLisT.Add(childNode);
+            LeafLisT.Remove(Parent);
+
             Parent.Children.Add(childNode);
             return childNode;
         }
 
-        public string TraverseNodes(TreeNode<T> StartParent)
+        public string TraverseNodes()
         {
+            // Start with a clear stringbuilder
             TraverseString.Clear();
-            TraverseString.Append(StartParent.Value.ToString());
-            TraverseString = TraverseStringBuilder(StartParent);
+            
+            TraverseString.Append(TopParent.Value.ToString());
+            TraverseString = TraverseStringBuilder(TopParent);
             return TraverseString.ToString();
         }
 
@@ -97,27 +104,35 @@ namespace N_array_Tree
                     ii--;
                 }
             }
+            // Remove children from parents and remove parents from children
             Parent.Children.Remove(node);
             node.Parent = null;
             Count--;
         }
 
-        public T SumToLeafs(TreeNode<T> Parent)
+        public List<T> SumToLeafs()
         {
-            foreach(TreeNode<T> child in Parent.Children)
+            List<T> SumLeafs = new List<T>();
+            TreeNode<T> IteratingParent = null;
+            dynamic a;
+            dynamic b;
+            
+            foreach (TreeNode<T> node in LeafLisT)
             {
-                dynamic a = SumLeaf;
-                dynamic b = child.Value;
-                if (child.Children.Count > 0)
+                IteratingParent = node;
+                T TempValue = IteratingParent.Value;
+                do
                 {
-                    SumToLeafs(child);
-                }
-                else
-                {
-                    SumLeaf = a + b;
-                }
+                    a = TempValue;
+                    b = IteratingParent.Parent.Value;
+                    TempValue = a + b;
+                    IteratingParent = IteratingParent.Parent;
+                    //if (IteratingParent.Parent != null) IteratingParent = IteratingParent.Parent;
+
+                } while (IteratingParent.Parent != null);
+                SumLeafs.Add(TempValue);
             }
-            return SumLeaf;
+            return SumLeafs;
         }
     }
 }

@@ -40,14 +40,13 @@ namespace N_array_Tree
             
             
 
-            string TraverseBoom = Boompje.TraverseNodes(Boompje.TopParent);
+            string TraverseBoom = Boompje.TraverseNodes();
 
 
             System.Console.WriteLine(TraverseBoom);
             //System.Console.WriteLine(Boompje.Count.ToString() + " " + Boompje.LeafCount.ToString());
-            var SumLeafs = Boompje.SumToLeafs(Boompje.TopParent);
-            System.Console.WriteLine(SumLeafs.ToString());
-
+            List<int> SumLeafs = Boompje.SumToLeafs();
+            
             System.Console.ReadLine();
         }
     }
