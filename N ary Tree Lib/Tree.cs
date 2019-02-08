@@ -127,7 +127,6 @@ namespace N_array_Tree
                     b = IteratingParent.Parent.Value;
                     TempValue = a + b;
                     IteratingParent = IteratingParent.Parent;
-                    //if (IteratingParent.Parent != null) IteratingParent = IteratingParent.Parent;
 
                 } while (IteratingParent.Parent != null);
                 SumLeafs.Add(TempValue);

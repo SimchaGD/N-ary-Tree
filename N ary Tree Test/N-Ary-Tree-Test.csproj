@@ -55,7 +55,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ClassLibrary1\N-Ary-Tree-Lib.csproj">
+    <ProjectReference Include="..\N ary Tree Lib\N-Ary-Tree-Lib.csproj">
       <Project>{1c397924-fbc7-4f25-b569-3b9bc8ff101c}</Project>
       <Name>N-Ary-Tree-Lib</Name>
     </ProjectReference>
