@@ -26,7 +26,7 @@ using System.Threading.Tasks;
 */
 namespace N_array_Tree
 {
-    class Tree<T>
+    public class Tree<T>
     {
         public int Count{ get; set; }
         public int LeafCount { get; set; }
@@ -63,7 +63,7 @@ namespace N_array_Tree
             return TraverseString.ToString();
         }
 
-        public StringBuilder TraverseStringBuilder(TreeNode<T> StartParent)
+        private StringBuilder TraverseStringBuilder(TreeNode<T> StartParent)
         {
             TraverseString.Append("[");
             int ChildCount = 1;
@@ -98,6 +98,7 @@ namespace N_array_Tree
                 }
             }
             Parent.Children.Remove(node);
+            node.Parent = null;
             Count--;
         }
 

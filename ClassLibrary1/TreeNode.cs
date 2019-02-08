@@ -26,7 +26,7 @@ using System.Threading.Tasks;
 */
 namespace N_array_Tree
 {
-    class TreeNode<T>
+    public class TreeNode<T>
     {
         public T Value { get; set; }
         public TreeNode<T> Parent { get; set; }
