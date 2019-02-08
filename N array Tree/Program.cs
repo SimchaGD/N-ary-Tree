@@ -14,7 +14,7 @@ using System.Threading.Tasks;
  *  Implementeer de volgende methods op Tree:
  *DONE  AddChildNode(parentNode, value)
  *      [Voegt een nieuwe TreeNode toe met een waarde onder de parent TreeNode]
- *      RemoveNode(node)
+ *DONE  RemoveNode(node)
  *      [Verwijder TreeNode met onderliggende Nodes]
  *DONE  TraverseNodes()
  *      [Geeft alle node waardes terug (met iterator)]
@@ -33,22 +33,24 @@ namespace N_array_Tree
     {
         static void Main(string[] args)
         {
-            Tree<int> Boompje = new Tree<int>(1);
-            TreeNode<int> Child1 = Boompje.AddChildNode(3, Boompje.TopParent);
-            TreeNode<int> Child2 = Boompje.AddChildNode(8, Child1);
-            TreeNode<int> Child21 = Boompje.AddChildNode(2, Child1);
-            TreeNode<int> Child11 = Boompje.AddChildNode(1, Boompje.TopParent);
-            TreeNode<int> Child31 = Boompje.AddChildNode(5, Child11);
-            TreeNode<int> Child32 = Boompje.AddChildNode(7, Child11);
-            TreeNode<int> Child33 = Boompje.AddChildNode(8, Child11);
+            Tree<string> Boompje = new Tree<string>("Play Music");
+            TreeNode<string> Child1 = Boompje.AddChildNode("Halo", Boompje.TopParent);
+            TreeNode<string> Child2 = Boompje.AddChildNode("wereld", Child1);
+            TreeNode<string> Child21 = Boompje.AddChildNode("wereld", Child1);
+            TreeNode<string> Child11 = Boompje.AddChildNode("De", Boompje.TopParent);
+            TreeNode<string> Child31 = Boompje.AddChildNode("wereld", Child11);
+            TreeNode<string> Child32 = Boompje.AddChildNode("is", Child11);
+            TreeNode<string> Child33 = Boompje.AddChildNode("van", Child11);
             
 
             string TraverseBoom = Boompje.TraverseNodes(Boompje.TopParent);
-            string TraverseBoomHalf = Boompje.TraverseNodes(Child1);
+
 
             System.Console.WriteLine(TraverseBoom);
-            System.Console.WriteLine(Boompje.Count.ToString() + " " + Boompje.LeafCount.ToString());
-            System.Console.WriteLine(TraverseBoomHalf);
+            //System.Console.WriteLine(Boompje.Count.ToString() + " " + Boompje.LeafCount.ToString());
+            var SumLeafs = Boompje.SumToLeafs(Boompje.TopParent);
+            System.Console.WriteLine(SumLeafs.ToString());
+
             System.Console.ReadLine();
         }
     }

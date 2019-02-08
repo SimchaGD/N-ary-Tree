@@ -32,6 +32,7 @@ namespace N_array_Tree
         public int LeafCount { get; set; }
         public TreeNode<T> TopParent { get; set; }
         public StringBuilder TraverseString = new StringBuilder();
+        public T SumLeaf;
 
         public Tree(T initialValue)
         {
@@ -80,7 +81,42 @@ namespace N_array_Tree
             return TraverseString;
         }
 
-        
+        public void RemoveNode(TreeNode<T> node)
+        {
+            TreeNode<T> Parent = node.Parent;
 
+            if (node.Children.Count == 0)
+            {
+                LeafCount--;
+            }
+            else
+            {
+                for (int ii = 1; ii <= node.Children.Count; ii++)
+                {
+                    RemoveNode(node.Children[node.Children.Count - ii]);
+                    ii--;
+                }
+            }
+            Parent.Children.Remove(node);
+            Count--;
+        }
+
+        public T SumToLeafs(TreeNode<T> Parent)
+        {
+            foreach(TreeNode<T> child in Parent.Children)
+            {
+                dynamic a = SumLeaf;
+                dynamic b = child.Value;
+                if (child.Children.Count > 0)
+                {
+                    SumToLeafs(child);
+                }
+                else
+                {
+                    SumLeaf = a + b;
+                }
+            }
+            return SumLeaf;
+        }
     }
 }
